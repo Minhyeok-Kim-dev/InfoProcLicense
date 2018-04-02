@@ -1,0 +1,35 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mink.license.mapper.TermMapper">
+	<!-- DTO <=> ResultMap Bind -->
+	<resultMap type="Term" id="termResult">
+		<result column="short_nm" property="shortNm" />
+		<result column="full_nm" property="fullNm" />
+		<result column="kor_nm" property="korNm" />
+	</resultMap>
+	
+	<insert id="insertTerm" parameterType="Term">
+		<selectKey resultType="int" keyProperty="seq" order="BEFORE">
+			SELECT COALESCE(MAX(seq),0) + 1 seq
+				  FROM term
+				 WHERE 1 = 1
+				   AND sec = ${sec}
+		</selectKey>
+		INSERT INTO term
+		VALUES (${sec}, ${seq}, '${shortNm}', '${fullNm}', '${korNm}', '${contents}');	
+	</insert>
+	
+	<select id="selectTermList" resultMap="termResult">
+		SELECT *
+		  FROM term;
+	</select>
+	
+	<select id="selectTermListBySearchData" resultMap="termResult" parameterType="String">
+		SELECT *
+		  FROM term
+		 WHERE 1 = 1
+		   AND short_nm LIKE '%%${value}%%'		
+		    OR full_nm LIKE '%%${value}%%'
+		    OR kor_nm LIKE '%%${value}%%'
+	</select>
+</mapper>

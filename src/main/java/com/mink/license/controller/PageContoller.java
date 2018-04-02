@@ -39,7 +39,7 @@ public class PageContoller {
 		return "term_list";
 	}
 	
-	@RequestMapping(value = "/examMode", method = RequestMethod.GET)
+	@RequestMapping(value = {"", "/", "/examMode"}, method = RequestMethod.GET)
 	public String examMode() {
 		return "exam_mode";
 	}
@@ -86,6 +86,7 @@ public class PageContoller {
 			System.out.println(jsonStr);
 			// FormData 모델에 추가
 			//model.addAttribute("termList", jsonString);
+			model.addAttribute("mode", mode);
 			model.addAttribute("termList", jsonStr);
 			
 		} catch (JsonProcessingException e) {

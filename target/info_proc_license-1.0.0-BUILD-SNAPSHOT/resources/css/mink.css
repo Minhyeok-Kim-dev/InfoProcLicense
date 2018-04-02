@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.content-wrapper{
+	margin:0 auto;
+	text-align:center;
+}
+.content-wrapper *{
+	margin:0 auto;
+	margin-top: 10px;
+}
+
+.btn-wrapper{
+	text-align:center;
+}
+.btn-wrapper *{
+	margin:0 auto;
+}
+
+textarea {
+	max-height: 200px;
+}

@@ -28,7 +28,13 @@ public class TermServiceImpl implements TermService {
 		} else {
 			termList = termMapper.selectTermListBySearchData(searchData);
 		}
-		
+		/*
+		// 용어명 소문자변환
+		for(Term term : termList) {
+			term.setShortNm(term.getShortNm().toLowerCase());
+			term.setFullNm(term.getFullNm().toLowerCase());
+		}
+		*/
 		return termList;
 	}
 }
