@@ -124,13 +124,21 @@
 					return true;
 				} 
 				
+				let sec = ${termList}[termIndex].sec;
 				let shortNm = ${termList}[termIndex].shortNm.toLowerCase();
 				let fullNm = ${termList}[termIndex].fullNm.toLowerCase();
 				let korNm = ${termList}[termIndex].korNm.toLowerCase();
 				
-				if( shortNm == answer || fullNm == answer || korNm == answer) {
-					return true;
+				if(sec == 1) {	// 용어 (약어명, 전체명, 한글명 정답처리)
+					if( shortNm == answer || fullNm == answer || korNm == answer) {
+						return true;
+					}	
+				} else if(sec == 2) {	// 전산영어 (약어명, 전체명 정답처리)
+					if( shortNm == answer || fullNm == answer) {
+						return true;
+					}	
 				}
+				
 				 
 				return false;
 			}

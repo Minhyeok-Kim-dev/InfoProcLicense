@@ -15,7 +15,7 @@
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/mink.js" />"></script>
 		
-		<script type="text/javascript" src="<c:url value="/resources/js/realgridjs-lic2.js"/>"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/realgridjs-lic.js"/>"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/realgridjs_eval.1.1.26.min.js"/>"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/realgridjs-api.1.1.26.js" />"></script>
 		
@@ -37,6 +37,7 @@
 				
 				$("#answer").on("keyup", function(e){
 					if(e.keyCode == 13) {
+						
 						if(termIndex == termList.length) {
 							return;
 						}
@@ -93,22 +94,30 @@
 				});
 			});
 			
-			function getTerm(termIndex) {
+			function getTerm(idx) {
 				$("#contents").html("");
 				
-				if(termIndex == termList.length) {
-					
+				if(idx == termList.length) {
 					// 시험모드인 경우 종료된경우 결과페이지로 이동
 					if(mode == 2) {
 						showResultPage();
+					} else {
+						// 연습모드인 경우 다시시작
+						termIndex = 0;
+						getTerm(termIndex);
 					}
+					
 					return;
 				}
 				
-				$("#contents").html(${termList}[termIndex].contents);
+				$("#contents").html(${termList}[idx].contents);
 			};
 			
 			function compareAnswer(termIndex, answer){
+				if(answer == "") {
+					return false;
+				}
+				
 				answer = answer.toLowerCase();
 				
 				if(termIndex >= ${termList}.length) {
